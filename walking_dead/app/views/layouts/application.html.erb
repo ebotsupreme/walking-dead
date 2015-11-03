@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WalkingDead</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <% flash.each do |name, message| %>
+    <div class="flash-message flash-message-<%= name %>">
+      <%= message %>
+    </div>
+  <% end %>
+
+  <% if !@current_user %>
+    <%= render('forms/login') %>
+    <%= link_to 'Create New User', users_new_path%>
+  <% else %>
+    <p>Logged In as <%= @current_user.user_name%> </p>
+    <%=link_to 'Log Out', logout_path, method: :delete%>
+  <% end %>
+
+<%= yield %>
+
+</body>
+</html>
