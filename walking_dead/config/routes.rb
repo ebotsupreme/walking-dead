@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-
-  get 'comments/new'
-
-  get 'comments/create'
-
-  get 'comments/edit'
-
-  get 'comments/update'
-
-  get 'comments/destroy'
+  #
+  # get 'comments/new'
+  #
+  # get 'comments/create'
+  #
+  # get 'comments/edit'
+  #
+  # get 'comments/update'
+  #
+  # get 'comments/destroy'
 
   root 'posts#index'
 
@@ -22,13 +22,15 @@ Rails.application.routes.draw do
   get 'users/:id/edit' => 'users#edit'
   patch 'users/:id' => 'users#update'
 
-  get 'posts/new' => 'posts#new'
-  post 'posts' => 'posts#create'
-  get 'posts/:id' => 'posts#show', as: :post
+  # get 'posts/new' => 'posts#new'
+  # post 'posts' => 'posts#create'
+  # get 'posts/:id' => 'posts#show', as: :post
   #get 'login', to: 'sessions#new'
   #resources :sessions, only: [:new, :create, :destroy]
 # resources :users
-# resources :posts
+ resources :posts do
+   resources :comments
+ end
 
 
 
