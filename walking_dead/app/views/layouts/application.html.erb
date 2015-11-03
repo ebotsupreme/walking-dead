@@ -8,21 +8,31 @@
 </head>
 <body>
 
-  <% flash.each do |name, message| %>
-    <div class="flash-message flash-message-<%= name %>">
-      <%= message %>
+<% flash.each do |name, message| %>
+  <div class="flash-message flash-message-<%= name %>">
+    <%= message %>
+  </div>
+<% end %>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+      </a>
     </div>
-  <% end %>
+    <% if !@current_user %>
+      <%= render('forms/login') %>
+      <%= link_to 'Create New User', users_new_path%>
+    <% else %>
+      <p>Logged In as <%= @current_user.user_name%> </p>
+      <%=link_to 'Log Out', logout_path, method: :delete%>
+    <% end %>
+  </div>
+</nav>
 
-  <% if !@current_user %>
-    <%= render('forms/login') %>
-    <%= link_to 'Create New User', users_new_path%>
-  <% else %>
-    <p>Logged In as <%= @current_user.user_name%> </p>
-    <%=link_to 'Log Out', logout_path, method: :delete%>
-  <% end %>
-
+<div class="container">
 <%= yield %>
+</div>
 
 </body>
 </html>

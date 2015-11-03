@@ -5,9 +5,10 @@ class PostsController < ApplicationController
   end
 
   def show
-      @post = Post.find(params[:id])
-      @current_user = current_user
-    
+    @post = Post.find(params[:id])
+    @current_user = current_user
+    @comment = Comment.new
+    @comments = Comment.where(post_id: @post.id)
   end
 
   def new

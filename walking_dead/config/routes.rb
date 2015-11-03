@@ -22,15 +22,19 @@ Rails.application.routes.draw do
   get 'users/:id/edit' => 'users#edit'
   patch 'users/:id' => 'users#update'
 
-  # get 'posts/new' => 'posts#new'
-  # post 'posts' => 'posts#create'
-  # get 'posts/:id' => 'posts#show', as: :post
-  #get 'login', to: 'sessions#new'
-  #resources :sessions, only: [:new, :create, :destroy]
-# resources :users
- resources :posts do
-   resources :comments
- end
+  get 'posts/new' => 'posts#new'
+  post 'posts' => 'posts#create'
+  get 'posts/:id' => 'posts#show', as: :post
+  get 'login', to: 'sessions#new'
+  resources :sessions, only: [:new, :create, :destroy]
+
+  patch 'comment/:id' => 'comments#update'
+
+  delete '/posts/:post_id/comments/:id' => 'comments#destroy', as: :delete_comment
+
+  resources :posts, except: [:edit, :update, :destroy] do
+    resources :comments, only: [:create, :update]
+  end
 
 
 

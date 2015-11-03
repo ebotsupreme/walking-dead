@@ -1,11 +1,31 @@
-<h1><%= @post.title %></h1>
-
-
+<h1><%= @post.title %> <%= @post.date_published %></h1>
   <h2><b>User Name:</b> <%= @post.user.user_name %></h2>
   <p><b>Post:</b> <%= @post.body %></p>
   <p><b>Category:</b> <%= @post.category %></p>
 
   <br>
 
+<div class="">
+  <% @post.comments.each do |c| %>
+  <ul class="list-group">
+    <li class="list-group-item"><%= c.body %><br>
+      <% if c.user %>
+        <%= c.user.user_name %>
+      <%else %>
+        Anonymous User
+      <% end %>
+      <%= link_to "Delete", {controller: "comments", action: "destroy", id: c.id, post_id: c.post_id}, method: :delete %>
+    </li>
+  </ul>
+  <% end %>
+</div>
+<div class="">
+  <%= form_for [@post, Comment.new] do |f| %>
+      <div>
+          <%= f.label :body, "New comment:" %>
+          <%= f.text_area :body %>
+      </div>
 
-<%= render('comments/new') %>
+      <%= f.submit "Add your comment!" %>
+  <% end %>
+</div>
