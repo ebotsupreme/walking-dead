@@ -1,2 +1,8 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<h1><%= @post.title %></h1>
+
+
+  <h2><b>User Name:</b> <%= @post.user.user_name %></h2>
+  <p><b>Post:</b> <%= @post.body %></p>
+  <p><b>Category:</b> <%= @post.category %></p>
+
+  <br>

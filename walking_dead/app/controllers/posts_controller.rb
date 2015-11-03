@@ -5,12 +5,23 @@ class PostsController < ApplicationController
   end
 
   def show
+      @post = Post.find(params[:id])
+      @current_user = current_user
   end
 
   def new
+    @post = Post.new
+    @user = current_user
   end
 
   def create
+    @post = Post.new post_params
+    @post.user_id = current_user.id
+    if @post.save
+      redirect_to root_path
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -20,5 +31,10 @@ class PostsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+  def post_params
+    params.require(:post).permit(:title, :body, :category)
   end
 end

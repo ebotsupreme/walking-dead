@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
 
-  post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
+  get 'comments/new'
+
+  get 'comments/create'
+
+  get 'comments/edit'
+
+  get 'comments/update'
+
+  get 'comments/destroy'
 
   root 'posts#index'
+
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
 
   get 'users' => 'users#index'
   get 'users/new' => 'users#new'
@@ -12,9 +22,9 @@ Rails.application.routes.draw do
   get 'users/:id/edit' => 'users#edit'
   patch 'users/:id' => 'users#update'
 
-  get 'posts/:id' => 'posts#show'
-
-
+  get 'posts/new' => 'posts#new'
+  post 'posts' => 'posts#create'
+  get 'posts/:id' => 'posts#show', as: :post
   #get 'login', to: 'sessions#new'
   #resources :sessions, only: [:new, :create, :destroy]
 # resources :users
