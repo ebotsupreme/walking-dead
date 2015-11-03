@@ -10,15 +10,19 @@
   <ul class="list-group">
     <li class="list-group-item"><%= c.body %><br>
       <% if c.user %>
-        <%= c.user.user_name %>
-      <%else %>
+        <%= c.user.user_name %>, creater_id: <%= c.user.id %>, user_id: <%= @current_user.id %>
+      <% else %>
         Anonymous User
       <% end %>
-      <%= link_to "Delete", {controller: "comments", action: "destroy", id: c.id, post_id: c.post_id}, method: :delete %>
+      <% if @current_user.id == c.user.id %>
+        <%= link_to "Delete", {controller: "comments", action: "destroy", id: c.id, post_id: c.post_id}, method: :delete %>
+      <% end %>
+
     </li>
   </ul>
   <% end %>
 </div>
+
 <div class="">
   <%= form_for [@post, Comment.new] do |f| %>
       <div>
