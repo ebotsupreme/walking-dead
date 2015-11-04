@@ -1,23 +1,29 @@
 <div class="">
-  <h1><%= @post.title %> <%= @post.date_published %></h1>
-    <h2><b>User Name:</b> <%= @post.user.user_name %></h2>
-    <p><b>Post:</b> <%= @post.body %></p>
+  <h3><b><%= @post.title %></b></h4> <h6><%= @post.date_published %></h6>
+    <%= image_tag @post.user.image(:small) %>
+    <h5><b>User Name:</b> <%= @post.user.user_name %></h5>
+    <div class="postBody"><p><%= @post.body %></p></div>
     <p><b>Category:</b> <%= @post.category %></p>
-    <% if current_user.id == @post.user_id %>
-    <%= link_to "Edit Post", edit_post_path(@post.id) %>
-    <%= link_to "Delete Post", delete_post_path(@post.id), method: :delete %>
+    <% if current_user %>
+      <% if current_user.id == @post.user_id %>
+      <%= link_to "Edit Post", edit_post_path(@post.id) %>
+      <%= link_to "Delete Post", delete_post_path(@post.id), method: :delete %>
+      <% end %>
     <% end %>
     <br>
 </div>
 <div class="">
+  <%= will_paginate @comments %>
   <% @post.comments.each do |c| %>
   <ul class="list-group">
-    <li class="list-group-item"><%= c.body %><br>
+    <li class="list-group-item"><br>
       <% if c.user %>
+        <%= image_tag c.user.image(:small) %>
         <%= c.user.user_name %>
       <% else %>
         Anonymous User
       <% end %>
+      <span class="move_right"><%= c.body %></span><br>
       <% if current_user && current_user.id == c.user.id %>
         <%= link_to "Edit", {controller: "comments", action: "edit", id: c.id, post_id: c.post_id} %>
         <%= link_to "Delete", {controller: "comments", action: "destroy", id: c.id, post_id: c.post_id}, method: :delete %>

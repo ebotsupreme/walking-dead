@@ -1,8 +1,10 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1>Profile Page</h1>
+<p>All  your info are belong to us!</p>
 
-  <h2><b>User Name:</b> <%= @user.user_name %></h2>
-  <p><b>Email:</b> <%= @user.email %></p>
-  <p><b>Bio:</b> <%= @user.bio %></p>
-  <p><b>Pic:</b> <%= @user.pic_url %></p>
-  <br>
+<%= link_to image_tag(@user.image.url(:med)), @user.image.url %>
+
+<h4><b>Name:</b> <%= @user.user_name %></h4>
+<p><b>Email:</b> <%= @user.email %></p>
+<p><b>Bio:</b> <%= @user.bio %></p>
+<br>
+<%= link_to "Edit your profile", edit_user_path(current_user) %>

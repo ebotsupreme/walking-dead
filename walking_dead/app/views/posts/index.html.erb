@@ -1,10 +1,40 @@
-<h1>Posts</h1>
-<p>Posts go here!</p>
 
-<% @posts.each do |post| %>
-  <%= link_to post.title, post_path(post) %>
-  <%= post.user.user_name %>
-  <br>
-<% end %>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h4>General Post</h4></div>
+  <div class="panel-body">
+    <p><div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @posts %>
+    </div>
+    <%= will_paginate @posts, :container => false %>
+  </div></p>
+  </div>
 
+  <!-- Table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <td>
+          <h5>Post Title:</h5>
+        </td>
+        <td>
+          <h5>Posted By:</h5>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td>
+            <%= link_to post.title, post_path(post) %>
+          </td>
+          <td>
+            <%= post.user.user_name %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <%= link_to 'Create a post', new_post_path%>

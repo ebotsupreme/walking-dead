@@ -1,11 +1,14 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
+    @posts = Post.paginate(:page => params[:page], :per_page => 4)
   end
 
   def show
     @post = Post.find(params[:id])
     @new_comment = Comment.new
+    @comments = Comment.where(post_id: @post.id)
+    @comments = Comment.paginate(:page => params[:page], :per_page => 4)
   end
 
   def new
