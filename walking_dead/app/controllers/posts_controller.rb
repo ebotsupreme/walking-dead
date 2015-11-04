@@ -1,19 +1,23 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
-    @current_user = current_user
+    #@current_user = current_user
   end
 
   def show
     @post = Post.find(params[:id])
-    @current_user = current_user
-    @comment = Comment.new
-    @comments = Comment.where(post_id: @post.id)
+    #@current_user = current_user
+    @new_comment = Comment.new
+    #@comments = Comment.where(post_id: @post.id)
   end
 
   def new
-    @post = Post.new
-    @user = current_user
+    if current_user
+      @post = Post.new
+    else
+      redirect_to users_new_path
+    end
+    #@user = current_user
   end
 
   def create

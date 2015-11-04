@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   delete '/posts/:post_id/comments/:id' => 'comments#destroy', as: :delete_comment
 
   resources :posts, except: [:edit, :update, :destroy] do
-    resources :comments, only: [:create, :update]
+    resources :comments, only: [:create, :update, :edit]
   end
 
 
