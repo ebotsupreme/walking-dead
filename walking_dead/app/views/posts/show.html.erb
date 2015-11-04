@@ -1,10 +1,14 @@
-<h1><%= @post.title %> <%= @post.date_published %></h1>
-  <h2><b>User Name:</b> <%= @post.user.user_name %></h2>
-  <p><b>Post:</b> <%= @post.body %></p>
-  <p><b>Category:</b> <%= @post.category %></p>
-
-  <br>
-
+<div class="">
+  <h1><%= @post.title %> <%= @post.date_published %></h1>
+    <h2><b>User Name:</b> <%= @post.user.user_name %></h2>
+    <p><b>Post:</b> <%= @post.body %></p>
+    <p><b>Category:</b> <%= @post.category %></p>
+    <% if current_user.id == @post.user_id %>
+    <%= link_to "Edit Post", edit_post_path(@post.id) %>
+    <%= link_to "Delete Post", delete_post_path(@post.id), method: :delete %>
+    <% end %>
+    <br>
+</div>
 <div class="">
   <% @post.comments.each do |c| %>
   <ul class="list-group">
@@ -14,12 +18,10 @@
       <% else %>
         Anonymous User
       <% end %>
-
       <% if current_user && current_user.id == c.user.id %>
         <%= link_to "Edit", {controller: "comments", action: "edit", id: c.id, post_id: c.post_id} %>
         <%= link_to "Delete", {controller: "comments", action: "destroy", id: c.id, post_id: c.post_id}, method: :delete %>
       <% end %>
-
     </li>
   </ul>
   <% end %>
@@ -32,7 +34,6 @@
             <%= f.label :body, "New comment:" %>
             <%= f.text_area :body %>
         </div>
-
         <%= f.submit "Add your comment!" %>
     <% end %>
   </div>

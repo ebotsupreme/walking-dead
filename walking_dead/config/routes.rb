@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+  get 'login', to: 'sessions#new'
+  resources :sessions, only: [:new, :create, :destroy]
 
   get 'users' => 'users#index'
   get 'users/new' => 'users#new'
@@ -25,12 +27,12 @@ Rails.application.routes.draw do
   get 'posts/new' => 'posts#new'
   post 'posts' => 'posts#create'
   get 'posts/:id' => 'posts#show', as: :post
-  get 'login', to: 'sessions#new'
-  resources :sessions, only: [:new, :create, :destroy]
-
-  patch 'comment/:id' => 'comments#update'
+  get 'posts/:id/edit' => 'posts#edit', as: :edit_post
+  patch 'posts/:id' => 'posts#update'
+  delete 'posts/:id' => 'posts#destroy', as: :delete_post
 
   delete '/posts/:post_id/comments/:id' => 'comments#destroy', as: :delete_comment
+  patch 'comment/:id' => 'comments#update'
 
   resources :posts, except: [:edit, :update, :destroy] do
     resources :comments, only: [:create, :update, :edit]

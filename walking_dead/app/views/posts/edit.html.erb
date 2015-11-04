@@ -1,2 +1,7 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<h1>Edit your post</h1>
+
+<%= form_for @post do |f| %>
+    <%= f.label :body, 'Edit your post' %>
+    <%= f.text_area :body %>
+    <%= f.submit "Edit your post!" %>
+<% end %>
