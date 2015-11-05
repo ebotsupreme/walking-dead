@@ -1,6 +1,3 @@
-
-
-
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title" id="post_title_panel">
@@ -42,6 +39,7 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <%= r.user.user_name %>: <%= r.body %>
+          <span id='date_comment'><%= r.date_published %></span>
         </div>
         </div>
       <% end %>
