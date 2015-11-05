@@ -1,7 +1,11 @@
 <%= form_for [@post, comment, @reply] do |f| %>
-  <%= f.text_area :body, class: 'form-control input-lg', id: 'comment_box_size' %><br>
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+  <%= f.text_area :body, class: 'form-control input-md', id: 'comment_box_size' %><br>
   <%= f.hidden_field :comment_id, :value => comment.id %>
-  <div class="row" id="comment_button">
+  <div id="comment_button">
     <%=f.submit "Submit Reply", class: 'btn btn-default' %>
   </div>
+</div>
+</div>
 <%end%>
