@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'replies/new'
+
+  get 'replies/create'
+
+  get 'replies/edit'
+
+  get 'replies/update'
+
+  get 'replies/destroy'
+
   #
   # get 'comments/new'
   #
@@ -35,7 +45,9 @@ Rails.application.routes.draw do
   patch 'comment/:id' => 'comments#update'
 
   resources :posts, except: [:edit, :update, :destroy] do
-    resources :comments, only: [:create, :update, :edit]
+    resources :comments, only: [:create, :update, :edit] do
+      resources :replies, only: [:create, :update, :edit]
+    end
   end
 
 

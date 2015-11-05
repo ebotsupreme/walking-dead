@@ -1,16 +1,18 @@
-<div class="">
-  <h3><b><%= @post.title %></b></h4> <h6><%= @post.date_published %></h6>
-    <%= image_tag @post.user.image(:small) %>
-    <h5><b>User Name:</b> <%= @post.user.user_name %></h5>
-    <div class="postBody"><p><%= @post.body %></p></div>
-    <p><b>Category:</b> <%= @post.category %></p>
-    <% if current_user %>
-      <% if current_user.id == @post.user_id %>
-      <%= link_to "Edit Post", edit_post_path(@post.id) %>
-      <%= link_to "Delete Post", delete_post_path(@post.id), method: :delete %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h3><b><%= @post.title %></b></h4> <h6><%= @post.date_published %></h6>
+      <%= image_tag @post.user.image(:small) %><br>
+      <b>User Name:</b> <%= @post.user.user_name %><br>
+      <b>Category:</b> <%= @post.category %>
+      <span class="postBody move"><%= @post.body %></span><br>
+      <% if current_user %>
+        <% if current_user.id == @post.user_id %>
+        <%= link_to "Edit Post", edit_post_path(@post.id) %>
+        <%= link_to "Delete Post", delete_post_path(@post.id), method: :delete %>
+        <% end %>
       <% end %>
-    <% end %>
     <br>
+  </div>
 </div>
 <div class="">
   <%= will_paginate @comments %>
@@ -28,19 +30,24 @@
         <%= link_to "Edit", {controller: "comments", action: "edit", id: c.id, post_id: c.post_id} %>
         <%= link_to "Delete", {controller: "comments", action: "destroy", id: c.id, post_id: c.post_id}, method: :delete %>
       <% end %>
+      <% c.replies.each do |r| %>
+        <%= r.body %>
+      <% end %>
+      <%= render 'replies/form', :comment => c %>
     </li>
   </ul>
   <% end %>
 </div>
 
 <% if current_user %>
-  <div class="">
-    <%= form_for [@post, @new_comment] do |f| %>
-        <div>
-            <%= f.label :body, "New comment:" %>
-            <%= f.text_area :body %>
+<div class="row">
+    <div class="form-group">
+        <label for="code">Comment</label>
+        <%= form_for [@post, @new_comment] do |f| %>
+        <%= f.text_area :body, class: 'form-control input-lg', id: 'comment_box_size' %><br>
+        <div class="row" id="comment_button">
+        <%=f.submit "Submit Comment", class: 'btn btn-default' %>
         </div>
-        <%= f.submit "Add your comment!" %>
-    <% end %>
+    <%end%>
   </div>
-<%end%>
+  <% end %>
