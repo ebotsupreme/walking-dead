@@ -7,7 +7,6 @@
       <%= @post.title %></h3> <span id="date"><%= @post.date_published %></span>
   </div>
   <div class="panel-body">
-
       <%= image_tag @post.user.image(:small) %><br>
       <b>User Name:</b> <%= @post.user.user_name %><br>
       <b>Category:</b> <%= @post.category %>
@@ -29,6 +28,7 @@
       <% if c.user %>
         <%= image_tag c.user.image(:small) %>
         <%= c.user.user_name %>
+        <span id='date_comment'><%= c.date_published %></span>
       <% else %>
         Anonymous User
       <% end %>
@@ -55,7 +55,7 @@
 <% if current_user %>
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <label for="code">Comment</label>
+        <label for="code" id="comment_color">Comment</label>
         <%= form_for [@post, @new_comment] do |f| %>
         <%= f.text_area :body, class: 'form-control input-md', id: 'comment_box_size' %><br>
         <div class="row" id="comment_button">
