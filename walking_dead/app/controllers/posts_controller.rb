@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
-    @posts = Post.paginate(:page => params[:page], :per_page => 15)
+    @posts = Post.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 15)
   end
 
   def show
@@ -28,6 +27,13 @@ class PostsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def like
+    @post = Post.find(params[:id])
+    @like = Post.find(params[:id])
+    @post.save
+    redirect_to post_path(@post)
   end
 
   def edit
@@ -57,4 +63,5 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :body, :category)
   end
+
 end

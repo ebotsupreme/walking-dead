@@ -8,6 +8,16 @@
       <b>User Name:</b> <%= @post.user.user_name %><br>
       <b>Category:</b> <%= @post.category %>
       <span class="postBody move"><%= @post.body %></span><br>
+      <div>
+        <% if current_user %>
+
+          <%= link_to post_path(@post.id), method: :post, class: "btn btn-default", id: "thumb" do %>
+          <i class="glyphicon glyphicon-thumbs-up"></i>
+
+
+          <% end %>
+        <% end %>
+      </div>
       <% if current_user %>
         <% if current_user.id == @post.user_id %>
         <%= link_to "Edit Post", edit_post_path(@post.id) %>
@@ -36,15 +46,18 @@
       <% end %>
 
       <% c.replies.each do |r| %>
+      <% if current_user %>
       <div class="panel panel-default">
         <div class="panel-body">
           <%= r.user.user_name %>: <%= r.body %>
           <span id='date_comment'><%= r.date_published %></span>
         </div>
         </div>
-      <% end %>
-      <%= render 'replies/form', :comment => c %>
 
+
+      <%= render 'replies/form', :comment => c %>
+      <% end %>
+      <% end %>
     </li>
   </ul>
   <% end %>
