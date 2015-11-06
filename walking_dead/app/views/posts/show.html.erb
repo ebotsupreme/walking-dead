@@ -11,7 +11,7 @@
       <div>
         <% if current_user %>
 
-          <%= link_to post_path(@post.id), method: :post, class: "btn btn-default", id: "thumb" do %>
+          <%= link_to post_path(@post.id), method: :get, class: "btn btn-default", id: "thumb" do %>
           <i class="glyphicon glyphicon-thumbs-up"></i>
 
 
@@ -55,9 +55,10 @@
         </div>
 
 
+
+      <% end %>
+      <% end %>
       <%= render 'replies/form', :comment => c %>
-      <% end %>
-      <% end %>
     </li>
   </ul>
   <% end %>

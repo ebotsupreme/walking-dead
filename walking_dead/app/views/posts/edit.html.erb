@@ -1,7 +1,10 @@
-<h1>Edit your post</h1>
+<div id="profile">
+  <h1>Edit your post</h1>
+</div>
 
-<%= form_for @post do |f| %>
-    <%= f.label :body, 'Edit your post' %>
-    <%= f.text_area :body %>
-    <%= f.submit "Edit your post!" %>
-<% end %>
+<div class="jumbotron col-md-4 col-md-offset-0">
+  <%= form_for @post do |f| %>
+      <%= f.text_area :body %>
+      <%= f.submit "Edit your post!" %>
+  <% end %>
+</div>

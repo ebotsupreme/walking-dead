@@ -1,10 +1,14 @@
-<h1>Profile Page</h1>
-<p>All  your info are belong to us!</p>
+<div id="profile">
+  <h1>Profile Page</h1>
+  <p>All  your info are belong to us!</p>
+</div>
 
-<%= link_to image_tag(@user.image.url(:med)), @user.image.url %>
+<div class="jumbotron col-md-4 col-md-offset-0">
+  <%= link_to image_tag(@user.image.url(:med)), @user.image.url %>
 
-<h4><b>Name:</b> <%= @user.user_name %></h4>
-<p><b>Email:</b> <%= @user.email %></p>
-<p><b>Bio:</b> <%= @user.bio %></p>
-<br>
-<%= link_to "Edit your profile", edit_user_path(current_user) %>
+    <h4><b>Name:</b> <%= @user.user_name %></h4>
+    <p><b>Email:</b> <%= @user.email %></p>
+    <p><b>Bio:</b> <%= @user.bio %></p>
+    <br>
+  <%= link_to "Edit your profile", edit_user_path(current_user) %>
+</div>

@@ -1,4 +1,6 @@
-<h1>Create a new Post!</h1>
+<div id="create_post">
+  <h1>Create a new Post!</h1>
+</div>
 <%= form_for @post do |f| %>
   <% if @post.errors.any? %>
   <div class="error_messages">
@@ -10,19 +12,18 @@
     </ul>
   </div>
   <% end %>
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :body %>
-    <%= f.text_area :body %>
-  </div>
-  <div class="field">
-    <%= f.label :category %>
-    <%= f.text_field :category %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="jumbotron col-md-3 col-md-offset-0">
+    <div class="field">
+      <%= f.text_field :title, placeholder: "Title of Post" %>
+    </div><br>
+    <div class="field">
+      <%= f.text_area :body, placeholder: "Put your post here!" %>
+    </div><br>
+    <div class="field">
+      <%= f.text_field :category, placeholder: "Category" %>
+    </div><br>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
   </div>
 <% end %>
